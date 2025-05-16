@@ -1,221 +1,206 @@
 /**
   Нормализация блочной модели
  */
- *,
- ::before,
- ::after {
-   box-sizing: border-box;
- }
- 
- /**
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
    Убираем внутренние отступы слева тегам списков,
    у которых есть атрибут class
   */
- :where(ul, ol):where([class]) {
-   padding-left: 0;
- }
- 
- /**
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
    Убираем внешние отступы body и двум другим тегам,
    у которых есть атрибут class
   */
- body,
- :where(blockquote, figure):where([class]) {
-   margin: 0;
- }
- 
- /**
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
    Убираем внешние отступы вертикали нужным тегам,
    у которых есть атрибут class
   */
- :where(
-   h1,
-   h2,
-   h3,
-   h4,
-   h5,
-   h6,
-   p,
-   ul,
-   ol,
-   dl
- ):where([class]) {
-   margin-block: 0;
- }
- 
- :where(dd[class]) {
-   margin-left: 0;
- }
- 
- :where(fieldset[class]) {
-   margin-left: 0;
-   padding: 0;
-   border: none;
- }
- 
- /**
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
    Убираем стандартный маркер маркированному списку,
    у которого есть атрибут class
   */
- :where(ul[class]) {
-   list-style: none;
- }
- 
- :where(address[class]) {
-   font-style: normal;
- }
- 
- /**
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
    Обнуляем вертикальные внешние отступы параграфа,
    объявляем локальную переменную для внешнего отступа вниз,
    чтобы избежать взаимодействие с более сложным селектором
   */
- p {
-   --paragraphMarginBottom: 24px;
- 
-   margin-block: 0;
- }
- 
- /**
+p {
+  --paragraphMarginBottom: 24px;
+
+  margin-block: 0;
+}
+
+/**
    Внешний отступ вниз для параграфа без атрибута class,
    который расположен не последним среди своих соседних элементов
   */
- p:where(:not([class]):not(:last-child)) {
-   margin-bottom: var(--paragraphMarginBottom);
- }
- 
- 
- /**
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
    Упрощаем работу с изображениями и видео
   */
- img,
- video {
-   display: block;
-   max-width: 100%;
-   height: auto;
- }
- 
- /**
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
    Наследуем свойства шрифт для полей ввода
   */
- input,
- textarea,
- select,
- button {
-   font: inherit;
- }
- 
- html {
-   /**
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
      Пригодится в большинстве ситуаций
      (когда, например, нужно будет "прижать" футер к низу сайта)
     */
-   height: 100%;
-   /**
+  height: 100%;
+  /**
      Убираем скачок интерфейса по горизонтали
      при появлении / исчезновении скроллбара
     */
-   scrollbar-gutter: stable;
- }
- 
- /**
+  scrollbar-gutter: stable;
+}
+
+/**
    Плавный скролл
   */
- html,
- :has(:target) {
-   scroll-behavior: smooth;
- }
- 
- body {
-   /**
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
      Пригодится в большинстве ситуаций
      (когда, например, нужно будет "прижать" футер к низу сайта)
     */
-   min-height: 100%;
-   /**
+  min-height: 100%;
+  /**
      Унифицированный интерлиньяж
     */
-   line-height: 1.5;
- }
- 
- /**
+  line-height: 1.5;
+}
+
+/**
    Нормализация высоты элемента ссылки при его инспектировании в DevTools
   */
- a:where([class]) {
-   display: inline-flex;
- }
- 
- /**
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
    Курсор-рука при наведении на элемент
   */
- button,
- label {
-   cursor: pointer;
- }
- 
- /**
+button,
+label {
+  cursor: pointer;
+}
+
+/**
    Приводим к единому цвету svg-элементы
    (за исключением тех, у которых уже указан
    атрибут fill со значением 'none' или начинается с 'url')
   */
- :where([fill]:not(
-   [fill="none"],
-   [fill^="url"]
- )) {
-   fill: currentColor;
- }
- 
- /**
+:where([fill]:not([fill="none"], [fill^="url"])) {
+  fill: currentColor;
+}
+
+/**
    Приводим к единому цвету svg-элементы
    (за исключением тех, у которых уже указан
    атрибут stroke со значением 'none')
   */
- :where([stroke]:not([stroke="none"])) {
-   stroke: currentColor;
- }
- 
- /**
+:where([stroke]:not([stroke="none"])) {
+  stroke: currentColor;
+}
+
+/**
    Чиним баг задержки смены цвета при взаимодействии с svg-элементами
   */
- svg * {
-   transition-property: fill, stroke;
- }
- 
- /**
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
    Приведение рамок таблиц в классический 'collapse' вид
   */
- :where(table) {
-   border-collapse: collapse;
-   border-color: currentColor;
- }
- 
- /**
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
    Удаляем все анимации и переходы для людей,
    которые предпочитают их не использовать
   */
- @media (prefers-reduced-motion: reduce) {
-   *,
-   ::before,
-   ::after {
-     animation-duration: 0.01ms !important;
-     animation-iteration-count: 1 !important;
-     transition-duration: 0.01ms !important;
-     scroll-behavior: auto !important;
-   }
- }
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 /* Мои стили */
- :root {
-    --var-main-color: white;
-    --var-dark-color: black;
- }
+:root {
+  --var-main-color: white;
+  --var-dark-color: black;
+}
 body {
-    background-color: rgba(0, 0, 0, 0.75);
-    background-image: url('../images/backBlack.jpg');
-    background-blend-mode: multiply;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+  background-color: rgba(0, 0, 0, 0.75);
+  background-image: url("../images/backBlack.jpg");
+  background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 h1 {
   color: var(--var-main-color);
@@ -264,7 +249,9 @@ a:hover {
 .menu-icon {
   display: none;
 }
-.close-menu {display: none;}
+.close-menu {
+  display: none;
+}
 .mainDisplay {
   display: flex;
   justify-content: center;
@@ -275,9 +262,9 @@ a:hover {
     linear-gradient(to bottom, transparent, #000),
     linear-gradient(to bottom, #000, transparent),
     linear-gradient(to bottom, transparent, #000);
-    mask-size: 18% 70%;
-    mask-position: 0 100%, 25% 25%, 50% 50%, 75% 0, 100% 50%;
-    mask-repeat: no-repeat;
+  mask-size: 18% 70%;
+  mask-position: 0 100%, 25% 25%, 50% 50%, 75% 0, 100% 50%;
+  mask-repeat: no-repeat;
 }
 .consult {
   width: 20vw;
@@ -292,7 +279,7 @@ a:hover {
   top: 50vh;
 }
 .consult:hover {
-  background-color: #4169E1;
+  background-color: #4169e1;
 }
 .consult:active {
   box-shadow: 3px 3px 0 0 blue inset;
@@ -306,6 +293,15 @@ a:hover {
 }
 .gal-item {
   width: calc(33% - 10px);
+  display: flex;
+  justify-content: center;
+}
+.gal-item img {
+  width: 100%;
+  border-radius: 5%;
+}
+.gal-pic {
+  cursor: pointer;
 }
 .gallery-header {
   margin: 50px 0 20px 0;
@@ -318,7 +314,9 @@ a:hover {
   display: flex;
   justify-content: center;
 }
-.revTwo {display: none;}
+.revTwo {
+  display: none;
+}
 .review-container {
   display: flex;
   justify-content: space-between;
@@ -343,7 +341,9 @@ a:hover {
 .review-content {
   color: var(--var-main-color);
 }
-.review-block {display: none;}
+.review-block {
+  display: none;
+}
 .active {
   display: block;
 }
@@ -351,13 +351,19 @@ a:hover {
   width: 50px;
   height: 50px;
   clip-path: polygon(25% 50%, 75% 25%, 75% 75%, 25% 50%, 25% 50%);
-  background-color: #fff
+  background-color: #fff;
 }
 .button-right {
   width: 50px;
   height: 50px;
-  clip-path: polygon(25% 25.25%, 75% 50.25%, 75% 50.25%, 75% 50.25%, 25% 75.25%);
-  background-color: #fff
+  clip-path: polygon(
+    25% 25.25%,
+    75% 50.25%,
+    75% 50.25%,
+    75% 50.25%,
+    25% 75.25%
+  );
+  background-color: #fff;
 }
 .button-nav {
   width: 100%;
@@ -383,14 +389,14 @@ a:hover {
   color: salmon;
 }
 .contacts-data {
-    row-gap: 1.5em;
-    display: flex;
-    justify-content: start;
-    align-items: end;
-    width: 50vw;
-    flex-direction: column;
-    padding: 0 15px;
-    font-size: 2em;
+  row-gap: 1.5em;
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  width: 50vw;
+  flex-direction: column;
+  padding: 0 15px;
+  font-size: 2em;
 }
 .address {
   color: var(--var-main-color);
@@ -411,6 +417,7 @@ a:hover {
 footer {
   margin: 50px 0;
   display: flex;
+  align-items: center;
   column-gap: 25px;
 }
 .menu-footer {
@@ -434,19 +441,23 @@ footer {
 }
 .picture-footer {
   width: 33%;
+  height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .disclaimer {
   font-size: 0.7em;
   display: flex;
   align-items: end;
   text-align: end;
-  padding: 0 0.5em 2em 0;
+  padding: 0 0.5em 2em 0.5em;
   color: var(--var-main-color);
   width: 33%;
 }
-.site-bottom {height: 3vh;}
+.site-bottom {
+  height: 3vh;
+}
 .big-picture {
   position: fixed;
   top: 3vh;
@@ -530,35 +541,40 @@ footer {
   .contacts-data {
     font-size: 1em;
   }
-  footer {margin: 20px 0;}
+  footer {
+    margin: 20px 0;
+  }
 }
 @media (max-width: 740px) {
- 
 }
 @media (max-width: 480px) {
-  html {background-color: var(--var-dark-color);}
-   .menu {
+  html {
+    background-color: var(--var-dark-color);
+  }
+  .menu {
     display: none;
-   }
-   .menu-minscreen {
-    position: absolute;
+  }
+  .menu-minscreen {
+    position: fixed;
     background-color: #000;
     width: 100vw;
     height: 100vh;
     z-index: 2000;
     justify-content: center;
-   }
-   .menu-small .menu-item {margin-top: 15px;}
-   .menu-minscreen .header-menu-link {
+  }
+  .menu-small .menu-item {
+    margin-top: 15px;
+  }
+  .menu-minscreen .header-menu-link {
     font-size: 1em;
-   }
-   .menu-icon {
+  }
+  .menu-icon {
     display: flex;
     height: 50%;
     aspect-ratio: 1;
     order: 5;
   }
-   .button-menu {
+  .button-menu {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -568,16 +584,19 @@ footer {
     background-color: unset;
     border-radius: 50%;
     border: 5px solid var(--var-main-color);
-   }
-   .header {
+  }
+  .header {
     justify-content: space-around;
     align-items: start;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 45px;
     margin: 25px 0;
-   }
-   .logo {margin: 0; z-index: 2000;}
-   .close-menu {
+  }
+  .logo {
+    margin: 0;
+    z-index: 2000;
+  }
+  .close-menu {
     display: none;
     justify-content: center;
     align-items: center;
@@ -586,47 +605,63 @@ footer {
     border: 2px solid white;
     z-index: 2000;
     border-radius: 50%;
-   }
-   .cross {
+  }
+  .cross {
     width: 100%;
     height: 100%;
-    clip-path: polygon(25% 25%, 45% 50%, 25% 75%, 50% 50%, 75% 75%, 55% 50%, 75% 25%, 50% 50%);
+    clip-path: polygon(
+      25% 25%,
+      45% 50%,
+      25% 75%,
+      50% 50%,
+      75% 75%,
+      55% 50%,
+      75% 25%,
+      50% 50%
+    );
     background-color: var(--var-main-color);
-   }
-   .right-side {display: none;}
-   .spansy {
+  }
+  .right-side {
+    display: none;
+  }
+  .spansy {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     gap: 13px;
-   }
-   .but-line {
+  }
+  .but-line {
     width: 50px;
     height: 5px;
     background-color: var(--var-main-color);
-   }
-   .big-picture {
+  }
+  .big-picture {
     width: 90vw;
     top: 5vh;
     left: 5vw;
-   }
-   .consult {
+  }
+  .consult {
     font-size: 0.7em;
-   }
-   .review-container {
+  }
+  .review-container {
     width: 90vw;
-   }
-   .review-head {margin: 0 0 15px 0;}
-   .telephone {text-align: end; font-size: 0.7em;}
-   .menu-footer-list {
+  }
+  .review-head {
+    margin: 0 0 15px 0;
+  }
+  .telephone {
+    text-align: end;
+    font-size: 0.7em;
+  }
+  .menu-footer-list {
     row-gap: 0.05em;
-   }
-   .menu-footer-list a {
+  }
+  .menu-footer-list a {
     font-size: 0.5em;
-   }
-   .disclaimer {
+  }
+  .disclaimer {
     font-size: 0.5em;
-   }
+  }
 }
 
 @media (min-width: 1800px) {
@@ -653,7 +688,7 @@ footer {
     font-size: 1.5em;
   }
 
-.disclaimer {
-  font-size: 1em;
-}
+  .disclaimer {
+    font-size: 1em;
+  }
 }
