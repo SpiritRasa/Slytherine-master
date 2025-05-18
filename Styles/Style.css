@@ -641,7 +641,7 @@ footer {
     left: 5vw;
   }
   .consult {
-    font-size: 0.7em;
+    font-size: 0.6em;
   }
   .review-container {
     width: 90vw;
@@ -653,6 +653,9 @@ footer {
     text-align: end;
     font-size: 0.7em;
   }
+  .contacts {
+    padding: 1em;
+  }
   .menu-footer-list {
     row-gap: 0.05em;
   }
@@ -661,6 +664,11 @@ footer {
   }
   .disclaimer {
     font-size: 0.5em;
+  }
+  .form-container {
+    height: 50vh;
+    width: 60vw;
+    left: 20vw;
   }
 }
 
@@ -690,5 +698,85 @@ footer {
 
   .disclaimer {
     font-size: 1em;
+  }
+}
+@media (min-width: 1023px) {
+  .form-container {
+    height: 50vh;
+  }
+  .contacts {
+    padding: 1em;
+  }
+}
+@media (min-width: 1365px) {
+  .consult {
+    width: 30vw;
+    left: 35vw;
+    font-size: 2em;
+  }
+  .form-container {
+  }
+  .form-container h3 {
+    font-size: 1.8em;
+  }
+  input {
+    height: 3em;
+  }
+  .form-button {
+    height: 3em;
+  }
+  .gal-item img {
+    width: 70vw;
+  }
+  .big-picture {
+    left: 15vw;
+    max-height: 100%;
+    top: 0;
+  }
+  .review-container {
+    font-size: 2em;
+  }
+  .button-nav {
+    width: 60px;
+  }
+}
+@media (min-width: 1919px) {
+  .form-container {
+    justify-content: space-evenly;
+  }
+  .form-container h3 {
+    font-size: 2.5em;
+  }
+  input,
+  .form-button {
+    border-radius: 10%;
+    height: 3em;
+    font-size: 2em;
+  }
+  .review-container {
+    font-size: 1.5em;
+  }
+  .review-head {
+    margin: 0 2em;
+  }
+  .review-content {
+    margin: 1em;
+  }
+}
+@media (min-width: 2559px) {
+  .consult {
+    font-size: 3em;
+  }
+  .contacts {
+    column-gap: 100px;
+  }
+  .contacts-data {
+    font-size: 3em;
+  }
+  .local-map {
+    height: 100%;
+  }
+  .disclaimer {
+    font-size: 2em;
   }
 }
