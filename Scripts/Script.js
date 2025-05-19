@@ -107,6 +107,7 @@ targetBlock.addEventListener("click", function (event) {
 const formElement = document.querySelector(".form-container");
 const buttonElement = document.querySelectorAll(".consult");
 const formButtonElement = document.querySelector(".form-button");
+const closeButtonElement = document.querySelector(".close-button");
 
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("consult")) {
@@ -122,3 +123,12 @@ document.addEventListener("click", function (event) {
     console.log("Скрыли");
   }
 });
+
+closeButtonElement.addEventListener(
+  "click",
+  function (event) {
+    formElement.style.display = "none";
+    console.log("Скрыли");
+  },
+  true
+);
